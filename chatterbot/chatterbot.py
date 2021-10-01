@@ -77,6 +77,8 @@ class ChatBot(object):
         additional_response_selection_parameters = kwargs.pop('additional_response_selection_parameters', {})
 
         persist_values_to_response = kwargs.pop('persist_values_to_response', {})
+        
+        option_read_only = kwargs.pop('read_only', self.read_only)
 
         if isinstance(statement, str):
             kwargs['text'] = statement
@@ -126,7 +128,7 @@ class ChatBot(object):
                     setattr(input_statement, response_key, response_value)
                     setattr(response, response_key, response_value)
 
-        if not self.read_only:
+        if not option_read_only :
             self.learn_response(input_statement)
 
             # Save the response generated for the input
